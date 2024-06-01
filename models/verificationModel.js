@@ -7,6 +7,14 @@ const verificationSchema = new Schema(
       type: Types.ObjectId,
       ref: 'User',
     },
+    userName: {
+      type: String,
+      required: true,
+    },
+    userEmail: {
+      type: String,
+      required: true,
+    },
     code: {
       type: String,
       required: true,

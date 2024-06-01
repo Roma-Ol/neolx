@@ -27,6 +27,11 @@ const registerUser = async (body) => {
     password,
   });
 
+  Object.assign(newVerificationCode, {
+    userName: name,
+    userEmail: email,
+  });
+
   await sendTelegramApproveRequest(name, email);
   await newVerificationCode.save();
   await newUser.save();
