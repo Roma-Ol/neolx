@@ -6,13 +6,15 @@ const {
   createListingHandler,
   getAllListingsHandler,
   updateListingHandler,
-  deleteListingByIdHandler,
+  deleteListingByIdHandler, getUserListingsHandler,
 } = require('../controllers/listingController');
 const { ensureEditPermission, ensureDeletePermission } = require('../middlewares/permissions');
 const { validateListingCreate, validateListingUpdate } = require('../middlewares/validations');
+const { ensureCreatePermission } = require('../middlewares/permissions/listingPermissions');
 
-router.get('/all', authGuard, asyncWrapper(getAllListingsHandler));
-router.post('/', authGuard, validateListingCreate, asyncWrapper(createListingHandler));
+router.get('/all', asyncWrapper(getAllListingsHandler));
+router.get('/my', authGuard, asyncWrapper(getUserListingsHandler));
+router.post('/', authGuard, ensureCreatePermission ,validateListingCreate, asyncWrapper(createListingHandler));
 router.put(
   '/:id',
   authGuard,

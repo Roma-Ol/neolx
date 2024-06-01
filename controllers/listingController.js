@@ -2,11 +2,16 @@ const {
   getAllListings,
   createListing,
   updateListing,
-  deleteListing,
+  deleteListing, getUserListings,
 } = require('../services/listingService');
 
 const getAllListingsHandler = async (req, res) => {
   const listings = await getAllListings();
+  res.status(200).send(listings);
+};
+
+const getUserListingsHandler = async (req, res) => {
+  const listings = await getUserListings(req.user._id);
   res.status(200).send(listings);
 };
 
@@ -37,4 +42,5 @@ module.exports = {
   createListingHandler,
   updateListingHandler,
   deleteListingByIdHandler,
+  getUserListingsHandler,
 };

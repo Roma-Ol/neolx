@@ -8,10 +8,6 @@ const createUserSchema = Joi.object({
     .message('Number must be a valid Ukrainian phone number'),
   email: Joi.string().required().email().message('Email must be a valid email address'),
   password: Joi.string().min(6).max(18).required(),
-  role: Joi.string().messages({
-    'string.base': 'Role must be a string',
-    'string.empty': 'Role is required',
-  }),
 });
 
 const updateUserSchema = Joi.object({
@@ -20,7 +16,6 @@ const updateUserSchema = Joi.object({
     .pattern(/^(?:\+38)?0\d{9}$/)
     .message('Number must be a valid Ukrainian phone number'),
   email: Joi.string().required().email().message('Email must be a valid email address'),
-  password: Joi.string().min(6).max(18).required(),
   role: Joi.string().messages({
     'string.base': 'Role must be a string',
     'string.empty': 'Role is required',

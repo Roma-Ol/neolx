@@ -7,8 +7,10 @@ const listingRouter = require('./routes/listingRoutes');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 const { setupBot } = require('./bot');
-dotenv.config();
+const cors = require('cors')
 
+dotenv.config();
+app.use(cors())
 app.use(express.json());
 app.use(morgan('tiny'));
 

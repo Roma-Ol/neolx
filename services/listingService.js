@@ -7,6 +7,12 @@ const getAllListings = async () => {
   return allListings;
 };
 
+const getUserListings = async (userId) => {
+  const userListings = await Listing.find({author: userId});
+
+  return userListings;
+};
+
 const getListingById = async (listingId) => {
   await verifyEntityExists(listingId, Listing);
   const selectedListing = await Listing.findById(listingId);
@@ -32,4 +38,4 @@ const deleteListing = async (listingId) => {
   await Listing.findByIdAndDelete(listingId);
 };
 
-module.exports = { getAllListings, createListing, updateListing, getListingById, deleteListing };
+module.exports = { getAllListings, getUserListings, createListing, updateListing, getListingById, deleteListing };

@@ -14,8 +14,8 @@ const registerHandler = async (req, res) => {
 
 const loginHandler = async (req, res) => {
   const { body } = req;
-  const token = await loginUser(body);
-  res.status(statusCode.OK).json({ status: 'success', token });
+  const userData = await loginUser(body);
+  res.status(statusCode.OK).json({ status: 'success', userData });
 };
 
 const verificationHandler = async (req, res) => {

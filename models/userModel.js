@@ -57,6 +57,7 @@ userSchema.pre('save', async function () {
   if (this.$isNew) {
     const salt = await genSalt(10);
     this.password = await hash(this.password, salt);
+    this.role = 'manager'
   }
 });
 

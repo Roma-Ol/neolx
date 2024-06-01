@@ -16,8 +16,6 @@ const updateUserHandler = async (req, res) => {
   const { id } = req.params;
   const updatedUser = await updateUser(id, req.body);
 
-  console.log('asd');
-
   res.status(200).send(updatedUser);
 };
 

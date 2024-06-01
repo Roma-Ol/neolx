@@ -50,7 +50,7 @@ const loginUser = async (body) => {
     return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRATION_TIME });
   }
 
-  return generateToken(userData);
+  return { token: generateToken(userData), role: userData.role };
 };
 
 const verifyUser = async (verificationCode) => {
