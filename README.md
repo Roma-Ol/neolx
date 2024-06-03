@@ -32,8 +32,8 @@ NGROK_SUBDOMAIN=your_ngrok_subdomain
 ```npm i```
 2. Start the Local Node.js Application:
 ```npm run start```
-3. Set Up Ngrok to Expose Your Local Server:
-```ngrok http 3000```
+3. Start the Telegram Bot and set the WebHook:
+```node setupWebhook.js```
    (Note the https forwarding address provided by Ngrok (e.g., https://abcd1234.ngrok-free.app).)
 4. Update the Telegram Webhook URL Using the Ngrok Address
 ```curl -F "url=https://<your-ngrok-subdomain>.ngrok-free.app/bot<your-bot-secret-path>" https://api.telegram.org/bot<YOUR_TELEGRAM_BOT_TOKEN>/setWebhook```
