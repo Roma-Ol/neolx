@@ -43,12 +43,6 @@ const userSchema = new Schema(
     },
     telegramChatId: { type: String },
     isVerified: { type: Boolean, default: false },
-    listings: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Listing',
-      },
-    ],
   },
   { timestamps: { createdAt: 'created_at' } },
 );
