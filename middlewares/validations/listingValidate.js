@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const { statusCode } = require('../../utils/constants');
 
 const createListingSchema = Joi.object({
   title: Joi.string()
@@ -19,7 +20,7 @@ const updateListingSchema = Joi.object({
 const validateListingCreate = (req, res, next) => {
   const { error } = createListingSchema.validate(req.body);
 
-  if (error) return res.status(400).json({ error: error.details[0].message });
+  if (error) return res.status(statusCode.BAD_REQUEST).json({ error: error.details[0].message });
 
   next();
 };
@@ -27,7 +28,7 @@ const validateListingCreate = (req, res, next) => {
 const validateListingUpdate = (req, res, next) => {
   const { error } = updateListingSchema.validate(req.body);
 
-  if (error) return res.status(400).json({ error: error.details[0].message });
+  if (error) return res.status(statusCode.BAD_REQUEST).json({ error: error.details[0].message });
 
   next();
 };

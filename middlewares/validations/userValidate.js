@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const { statusCode } = require('../../utils/constants');
 
 const createUserSchema = Joi.object({
   name: Joi.string().required().min(3).max(30).message('Name must be between 3 and 30 characters'),
@@ -30,7 +31,7 @@ const loginUserSchema = Joi.object({
 const validateUserCreate = (req, res, next) => {
   const { error } = createUserSchema.validate(req.body);
 
-  if (error) return res.status(400).json({ error: error.details[0].message });
+  if (error) return res.status(statusCode.BAD_REQUEST).json({ error: error.details[0].message });
 
   next();
 };
@@ -38,7 +39,7 @@ const validateUserCreate = (req, res, next) => {
 const validateUserLogin = (req, res, next) => {
   const { error } = loginUserSchema.validate(req.body);
 
-  if (error) return res.status(400).json({ error: error.details[0].message });
+  if (error) return res.status(statusCode.BAD_REQUEST).json({ error: error.details[0].message });
 
   next();
 };
@@ -46,7 +47,7 @@ const validateUserLogin = (req, res, next) => {
 const validateUserUpdate = (req, res, next) => {
   const { error } = updateUserSchema.validate(req.body);
 
-  if (error) return res.status(400).json({ error: error.details[0].message });
+  if (error) return res.status(statusCode.BAD_REQUEST).json({ error: error.details[0].message });
 
   next();
 };

@@ -26,7 +26,7 @@ const verificationHandler = async (req, res) => {
 
 const getAllVerificationsHandler = async (req, res) => {
   const verification = await getAllVerifications();
-  res.status(200).send(verification);
+  res.status(statusCode.OK).send(verification);
 };
 
 module.exports = {
