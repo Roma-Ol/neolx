@@ -12,7 +12,9 @@ bot.use(session());
 bot.use(stage.middleware());
 
 bot.start((ctx) => {
-  ctx.reply('Welcome! Log in to receive notifications regarding new users confirmations.');
+  ctx.reply(
+    'Welcome! Log in to receive notifications regarding new users confirmations. (Please use Your platform credentials.',
+  );
 });
 
 bot.command('login', (ctx) => {
