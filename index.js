@@ -7,11 +7,12 @@ const listingRouter = require('./routes/listingRoutes');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 const { setupBot } = require('./bot');
-const cors = require('cors')
+const cors = require('cors');
 const { statusCode } = require('./utils/constants');
+const { loginHandler } = require('./controllers/authControllers');
 
 dotenv.config();
-app.use(cors())
+app.use(cors());
 app.use(express.json());
 app.use(morgan('tiny'));
 
@@ -26,17 +27,17 @@ app.use((req, res, next) => {
   res.status(statusCode.NOT_FOUND).json({
     status: 'error',
     code: statusCode.NOT_FOUND,
-    message: 'Not Found'
+    message: 'Not Found',
   });
 });
 
 // Centralized requests error handler.
-app.use((err, req, res) => {
-  res.status(err.statusCode || statusCode.INTERNAL_SERVER_ERROR).json({
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.status(err.statusCode || err.status || statusCode.INTERNAL_SERVER_ERROR).json({
     status: 'error',
-    message: err.message || 'Internal Server Error'
+    message: err.message || 'Internal Server Error',
   });
 });
-
 
 module.exports = { app };
