@@ -8,6 +8,7 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 const { setupBot } = require('./bot');
 const cors = require('cors')
+const { statusCode } = require('./utils/constants');
 
 dotenv.config();
 app.use(cors())
@@ -20,21 +21,22 @@ app.use('/', authRouter);
 
 setupBot(app);
 
-// Centralized requests error handler.
-app.use((err, req, res) => {
-  res.status(err.statusCode || 500).json({
+// 404 request Handler.
+app.use((req, res, next) => {
+  res.status(statusCode.NOT_FOUND).json({
     status: 'error',
-    message: err.message || 'Internal Server Error',
+    code: statusCode.NOT_FOUND,
+    message: 'Not Found'
   });
 });
 
-// 404 request Handler.
-app.use((req, res) => {
-  res.status(404).json({
+// Centralized requests error handler.
+app.use((err, req, res) => {
+  res.status(err.statusCode || statusCode.INTERNAL_SERVER_ERROR).json({
     status: 'error',
-    code: 404,
-    message: 'Not Found',
+    message: err.message || 'Internal Server Error'
   });
 });
+
 
 module.exports = { app };
